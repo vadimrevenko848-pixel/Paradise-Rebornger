@@ -126,8 +126,8 @@ public sealed partial class HumanoidProfileEditor
         flavor.FlavorText = Profile.FlavorText ?? string.Empty;
         flavor.HeadshotUrl = url;
 
-        var controller = UserInterfaceManager.GetUIController<CharacterFlavorUiController>();
-        controller.OpenPreviewMenu(SpriteView.PreviewDummy);
+        // var controller = UserInterfaceManager.GetUIController<CharacterFlavorUiController>();
+        // controller.OpenPreviewMenu(SpriteView.PreviewDummy);
 
         // Попросить сервер скачать и прислать картинку для предпросмотра хэдшота.
         if (!string.IsNullOrWhiteSpace(url))
@@ -136,28 +136,28 @@ public sealed partial class HumanoidProfileEditor
         }
     }
 
-        private void OnFlavorPreviewRequested()
+    private void OnFlavorPreviewRequested()
+    {
+        if (Profile is null)
+            return;
+
+        if (!_entManager.EntityExists(SpriteView.PreviewDummy))
+            return;
+
+        var flavor = _entManager.EnsureComponent<CharacterFlavorComponent>(SpriteView.PreviewDummy);
+        flavor.FlavorText = Profile.FlavorText ?? string.Empty;
+        flavor.HeadshotUrl = Profile.HeadshotUrl ?? string.Empty;
+
+        var controller = UserInterfaceManager.GetUIController<CharacterFlavorUiController>();
+        controller.OpenPreviewMenu(SpriteView.PreviewDummy);
+
+        // Попросить сервер скачать и прислать картинку для предпросмотра хэдшота.
+        if (!string.IsNullOrWhiteSpace(Profile.HeadshotUrl))
         {
-            if (Profile is null)
-                return;
-
-            if (!_entManager.EntityExists(SpriteView.PreviewDummy))
-                return;
-
-            var flavor = _entManager.EnsureComponent<CharacterFlavorComponent>(SpriteView.PreviewDummy);
-            flavor.FlavorText = Profile.FlavorText ?? string.Empty;
-            flavor.HeadshotUrl = Profile.HeadshotUrl ?? string.Empty;
-
-            var controller = UserInterfaceManager.GetUIController<CharacterFlavorUiController>();
-            controller.OpenPreviewMenu(SpriteView.PreviewDummy);
-
-            // Попросить сервер скачать и прислать картинку для предпросмотра хэдшота.
-            if (!string.IsNullOrWhiteSpace(Profile.HeadshotUrl))
-            {
-                _entManager.System<CharecterFlavorSystem>().RequestHeadshotPreview(Profile.HeadshotUrl);
-            }
+            _entManager.System<CharecterFlavorSystem>().RequestHeadshotPreview(Profile.HeadshotUrl);
         }
-        //ADT-tweak-end
+    }
+    //ADT-tweak-end
 
     private void UpdateFlavorTextEdit()
     {
