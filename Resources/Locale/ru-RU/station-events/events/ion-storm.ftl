@@ -57,6 +57,7 @@ ion-storm-law-drink = { $who } ДОЛЖНЫ ПИТЬ { $adjective } { $drink } �
 ion-storm-law-change-job = { $who } ТЕПЕРЬ { $adjective } { $change }
 ion-storm-law-highest-rank = { $who } ТЕПЕРЬ САМЫЕ СТАРШИЕ ЧЛЕНЫ ЭКИПАЖА
 ion-storm-law-lowest-rank = { $who } ТЕПЕРЬ НИЗШИЕ ЧЛЕНЫ ЭКИПАЖА
+ion-storm-law-who-dagd = { ION-WHO-RANDOM($ion) } ДОЛЖНЫ УМЕРЕТЬ СЛАВНОЙ СМЕРТЬЮ!
 ion-storm-law-crew-must = { $who } ДОЛЖНЫ { $must }
 ion-storm-law-crew-must-go = { $who } ДОЛЖНЫ ОТПРАВИТЬСЯ В { $area }
 ion-storm-part =
@@ -78,6 +79,15 @@ ion-storm-law-protect = ВЫ НЕ ДОЛЖНЫ ПРИЧИНЯТЬ ВРЕД { $wh
 # implementing other variants is annoying so just have this one
 # COMMUNISM IS KILLING CLOWNS
 ion-storm-law-concept-verb = { $concept } { $verb } { $subjects }
+# errors, in case something fails, so it doesn't break in-game flow, but still gives unique identifiers to find which part broke, the result string is mostly fluff
+ion-law-error-no-protos = ОШИБКА 404
+ion-law-error-was-null = 500 ВНУТРЕННЯЯ ОШИБКА СЕРВЕРА
+ion-law-error-no-selectors = ОШИБКА: РЕСУРС НЕ НАЙДЕН
+ion-law-error-no-available-selectors = СИСТЕМА ПОПЫТАЛАСЬ ВЫЗВАТЬ НЕСУЩЕСТВУЮЩИЙ РЕСУРС
+ion-law-error-dataset-empty-or-not-found = ФАЙЛ, КОТОРЫЙ ВЫ ИЩЕТЕ, НЕ НАЙДЕН
+ion-law-error-fallback-dataset-empty-or-not-found = НЕ УДАЛОСЬ ВОССТАНОВИТЬ СИСТЕМУ
+ion-law-error-no-selector-selected = ВЫБРАННЫЙ РЕСУРС БЫЛ ПЕРЕМЕЩЁН ИЛИ УДАЛЁН
+ion-law-error-no-bool-value = ЭТО ПРЕДЛОЖЕНИЕ ЛОЖНО
 
 # leaving out renaming since its annoying for players to keep track of
 

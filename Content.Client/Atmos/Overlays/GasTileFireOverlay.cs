@@ -77,7 +77,7 @@ public sealed class GasTileFireOverlay : Overlay
         for (var i = 0; i < FireStates; i++)
         {
             var delays = _frameDelays[i];
-            if (delays.Length == 0)
+            if (delays == null || delays.Length == 0) // LP edit
                 continue;
 
             var frameCount = _frameCounter[i];
@@ -86,7 +86,10 @@ public sealed class GasTileFireOverlay : Overlay
 
             if (_timer[i] < time) continue;
             _timer[i] -= time;
-            _frameCounter[i] = (frameCount + 1) % _frames[i].Length;
+            // LP edit start
+            if (_frames[i] != null)
+                _frameCounter[i] = (frameCount + 1) % _frames[i].Length;
+            // LP edit end
         }
     }
 
@@ -107,7 +110,7 @@ public sealed class GasTileFireOverlay : Overlay
             xformQuery,
             _xformSys);
 
-        var mapUid = _mapSystem.GetMapOrInvalid(args.MapId);
+        var mapUid = _mapManager.GetMapEntityId(args.MapId); // LP edit
 
         if (args.Space != OverlaySpace.WorldSpaceEntities)
             return;

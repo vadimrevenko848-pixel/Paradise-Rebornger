@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using Content.Client._LP.Sponsors;
 using Content.Server.Database;
 using Content.Server.Preferences.Managers;
 using Content.Shared.Body;
@@ -100,7 +101,7 @@ namespace Content.IntegrationTests.Tests.Preferences
 
             await pair.Server.WaitAssertion(() =>
             {
-                var updated = HumanoidCharacterAppearance.EnsureValid(profile.Appearance, profile.Species, profile.Sex, []);
+                var updated = HumanoidCharacterAppearance.EnsureValid(profile.Appearance, profile.Species, profile.Sex, SponsorSimpleManager.GetMarkings().ToArray());
                 Assert.That(updated.Markings["Head"], Is.Empty);
                 Assert.That(updated.Markings.ContainsKey("OrganFake"), Is.False);
                 profile.Appearance = updated;

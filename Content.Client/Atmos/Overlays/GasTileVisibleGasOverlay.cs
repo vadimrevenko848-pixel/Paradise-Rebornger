@@ -100,7 +100,7 @@ public sealed class GasTileVisibleGasOverlay : Overlay
         for (var i = 0; i < _gasCount; i++)
         {
             var delays = _frameDelays[i];
-            if (delays.Length == 0)
+            if (delays == null || delays.Length == 0) // LP edit
                 continue;
 
             var frameCount = _frameCounter[i];
@@ -111,7 +111,10 @@ public sealed class GasTileVisibleGasOverlay : Overlay
                 continue;
 
             _timer[i] -= time;
-            _frameCounter[i] = (frameCount + 1) % _frames[i].Length;
+            // LP edit start
+            if (_frames[i] != null)
+                _frameCounter[i] = (frameCount + 1) % _frames[i].Length;
+            // LP edit end
         }
     }
 
@@ -133,7 +136,7 @@ public sealed class GasTileVisibleGasOverlay : Overlay
             xformQuery,
             _xformSys);
 
-        var mapUid = _mapSystem.GetMapOrInvalid(args.MapId);
+        var mapUid = _mapManager.GetMapEntityId(args.MapId); // LP edit
 
         if (_entManager.TryGetComponent<MapAtmosphereComponent>(mapUid, out var atmos))
             DrawMapOverlay(drawHandle, args, mapUid, atmos);
