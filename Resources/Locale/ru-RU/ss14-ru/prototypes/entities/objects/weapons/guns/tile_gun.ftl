@@ -1,5 +1,5 @@
-ent-WeaponTileGun = tile gun
-    .desc = A strange gun that shoots tiles. Shoot them with the floor!
+ent-WeaponTileGun = плиткомёт
+    .desc = Странная пушка, стреляющая плитками. Закидайте их полом!
 ent-WeaponTileGunEmpty = { ent-WeaponTileGun }
     .desc = { ent-WeaponTileGun.desc }
-    .suffix = empty
+    .suffix = пустой
